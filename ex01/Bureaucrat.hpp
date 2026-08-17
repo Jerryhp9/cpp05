@@ -6,8 +6,8 @@
 
 class Bureaucrat {
 	private:
-		const std::string _name;
-		int _grade;
+		const std::string name;
+		int grade;
 	public:
 		Bureaucrat();
 		Bureaucrat(int num, const std::string name);
