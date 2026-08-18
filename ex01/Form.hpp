@@ -3,6 +3,8 @@
 
 #include <iostream>
 
+class Bureaucrat;
+
 class Form {
 	private:
 		const std::string _name;
@@ -11,15 +13,14 @@ class Form {
 		const int _gradeToExecute;
 	public:
 		Form();
-		Form(int isSigned, int gradeToSign, int gradeToExecute);
+		Form(std::string form, int gradeToSign, int gradeToExecute);
 		Form& operator=(const Form& other);
 		~Form();
 		const std::string	getName();
 		bool				getIssigned();
-		const int			getGradeToSign();
-		const int			getGradeToExecute();
-		void beSigned();
-		void signForm();
+		int			getGradeToSign();
+		int			getGradeToExecute();
+		void beSigned(const Bureaucrat& personnel);
 		class GradeTooHighException : public std::exception {
 			public:
 				const char *what()const throw();

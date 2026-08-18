@@ -8,7 +8,7 @@ const char * Bureaucrat::GradeTooLowException::what() const throw() {
 	return ("Grade too low");
 }
 
-Bureaucrat::Bureaucrat(int num, const std::string name) : name(name),  grade(num)
+Bureaucrat::Bureaucrat(int num, const std::string name) : _name(name),  _grade(num)
 {
 	std::cout << "Bureaucrat constructor called" << std::endl;
 	 if (num < 1)
@@ -17,18 +17,18 @@ Bureaucrat::Bureaucrat(int num, const std::string name) : name(name),  grade(num
 		throw GradeTooHighException();
 }
 
-Bureaucrat::Bureaucrat() : name("Unknown"), grade(150) {
+Bureaucrat::Bureaucrat() : _name("Unknown"), _grade(150) {
 	std::cout << "Bureaucrat default constructor called" << std::endl;
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat& other) : name(other.name) {
-	this->grade = other.grade;
+Bureaucrat::Bureaucrat(const Bureaucrat& other) : _name(other._name) {
+	this->_grade = other._grade;
 }
 
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat& other) {
 	if (this != &other)
 	{
-		this->grade = other.grade;
+		this->_grade = other._grade;
 	}
 	return (*this);
 }
@@ -38,23 +38,33 @@ Bureaucrat::~Bureaucrat() {
 }
 
 const std::string Bureaucrat::getName() {
-	return (name);
+	return (_name);
 }
 
-int Bureaucrat::getGrade() {
-	return (grade);
+int Bureaucrat::getGrade() const{
+	return (_grade);
 }
 
 Bureaucrat& Bureaucrat::incrementGrade() {
-	if ((this->grade -= 1) < 1)
+	if ((this->_grade -= 1) < 1)
 		throw GradeTooLowException();
 	return (*this);
 }
 
 Bureaucrat& Bureaucrat::decrementGrade() {
-	if ((this->grade += 1) > 150)
+	if ((this->_grade += 1) > 150)
 		throw GradeTooHighException();
 	return (*this);
+}
+
+void Bureaucrat::signForm(Form& form) {
+	try {
+			form.beSigned(*this);
+			std::cout << this->getName() << " signed " << form.getName() << std::endl;
+	}
+	catch(Form::GradeTooLowException& e) {
+		std::cerr <<  _name << " couldn't sign " << form.getName() << " because his/her grade compared to " << e.what() << std::endl;
+	}
 }
 
 std::ostream& operator<<(std::ostream& out, const Bureaucrat& obj) {

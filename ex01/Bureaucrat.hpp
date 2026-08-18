@@ -3,11 +3,12 @@
 
 #include <iostream>
 #include <exception>
+#include "Form.hpp"
 
 class Bureaucrat {
 	private:
-		const std::string name;
-		int grade;
+		const std::string _name;
+		int _grade;
 	public:
 		Bureaucrat();
 		Bureaucrat(int num, const std::string name);
@@ -16,10 +17,11 @@ class Bureaucrat {
 		~Bureaucrat();
 
 		const std::string getName();
-		int getGrade();
+		int getGrade() const;
 
 		Bureaucrat& incrementGrade();
 		Bureaucrat& decrementGrade();
+		void signForm(Form& form);
 
 		class GradeTooHighException : public std::exception {
 			public:
