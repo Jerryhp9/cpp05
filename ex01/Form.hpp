@@ -18,8 +18,8 @@ class Form {
 		~Form();
 		const std::string	getName();
 		bool				getIssigned();
-		int			getGradeToSign();
-		int			getGradeToExecute();
+		int					getGradeToSign();
+		int					getGradeToExecute();
 		void beSigned(const Bureaucrat& personnel);
 		class GradeTooHighException : public std::exception {
 			public:
