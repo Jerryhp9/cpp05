@@ -2,20 +2,19 @@
 #define ROBOT
 
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 #include "AForm.hpp"
 
 class Bureaucrat;
 
-class RobotRequestForm : public AForm {
-	private:
-		std::string target;
+class RobotomyRequestForm : public AForm {
 	public:
-		RobotRequestForm();
-		RobotRequestForm(std::string s_target);
-		RobotRequestForm& operator=(const RobotRequestForm& other);
-		~RobotRequestForm();
-		std::string getTarget();
-		void execute(const Bureaucrat& executor) const;
+		RobotomyRequestForm();
+		RobotomyRequestForm(std::string s_target);
+		RobotomyRequestForm& operator=(const RobotomyRequestForm& other);
+		~RobotomyRequestForm();
+		void toExecute(const Bureaucrat& executor) const;
 };
 
 #endif

@@ -9,11 +9,11 @@ const char * AForm::GradeTooHighException::what() const throw() {
 	return ("form's grade is too high");
 }
 
-AForm::AForm() : _name("application form"), _isSigned(false), _gradeToSign(150), _gradeToExecute(150) {
+AForm::AForm() : _name("application form"), _target("random"), _isSigned(false), _gradeToSign(150), _gradeToExecute(150) {
 	std::cout << "form default constructor called" << std::endl;
 }
 
-AForm::AForm(std::string form, int gradeToSign, int gradeToExecute) : _name(form), _isSigned(false), _gradeToSign(gradeToSign), _gradeToExecute(gradeToExecute) {
+AForm::AForm(std::string form, std::string s_target, int gradeToSign, int gradeToExecute) : _name(form), _target(s_target), _isSigned(false), _gradeToSign(gradeToSign), _gradeToExecute(gradeToExecute) {
 	std::cout << "form constructor called" << std::endl;
 	if (gradeToSign < 1 || gradeToExecute < 1)
 		throw GradeTooHighException();
@@ -33,17 +33,12 @@ AForm::~AForm() {
 	std::cout << "form destructor called" << std::endl;
 }
 
-bool AForm::checkSignExecute(const Bureaucrat& executor) const {
-	if (this->_isSigned == true)
-	{
-		if (executor.getGrade() < this->_gradeToExecute)
-			return (true);
-	}
-	return (false);
-}
-
 const std::string AForm::getName() const {
 	return (_name);
+}
+
+const std::string AForm::getTarget() const {
+	return (_target);
 }
 
 bool AForm::getIssigned() const {
@@ -58,11 +53,31 @@ int AForm::getGradeToExecute() const {
 	return (_gradeToExecute);
 }
 
+bool AForm::checkSignExecute(const Bureaucrat& executor) const {
+	if (this->_isSigned == true)
+	{
+		if (executor.getGrade() <= this->_gradeToExecute)
+			return (true);
+	}
+	return (false);
+}
+
+void AForm::execute(const Bureaucrat& executor) const {
+	try {
+		if (checkSignExecute(executor) == false)
+			throw GradeTooLowException();
+		Toexecute();
+	}
+	catch (GradeTooLowException& e) {
+		std::cerr << executor.getName() << "'s grade compared to " << e.what() << std::endl;
+	}
+}
+
 void AForm::beSigned(const Bureaucrat& personnel) {
-	if (personnel.getGrade() > _gradeToSign)
-		throw GradeTooLowException();
-	else
+	if (personnel.getGrade() <= _gradeToSign)
 		_isSigned = true;
+	else
+		throw GradeTooLowException();
 }
 
 std::ostream& operator<<(std::ostream& out, const AForm& obj) {

@@ -1,10 +1,10 @@
 #include "ShrubberyCreationForm.hpp"
 
-ShrubberyCreationForm::ShrubberyCreationForm() : AForm("unknown", 145, 137) {
+ShrubberyCreationForm::ShrubberyCreationForm() : AForm("ShrubberyCreationForm", "unannounced", 145, 137) {
 	std::cout << "ShrubberyCreationForm default constructor called" << std::endl;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : AForm(target, 145, 137) {
+ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : AForm("ShrubberyCreationForm", target, 145, 137) {
 	std::cout << "ShrubberyCreationForm constructor called" << std::endl;
 }
 
@@ -24,11 +24,14 @@ ShrubberyCreationForm::~ShrubberyCreationForm() {
 	std::cout << "ShrubberyCreationForm destructor called" << std::endl;
 }
 
-void ShrubberyCreationForm::execute(const Bureaucrat& executor) const {
-	if (AForm::checkSignExecute(executor) == true)
-	{
+void ShrubberyCreationForm::toExecute() const {
 		std::ofstream outfile;
-		outfile.open(getName() + "_Shrubbery");
+		outfile.open(getTarget() + "_Shrubbery");
+		if (!outfile.is_open())
+		{
+			std::cerr << "Unable to open \"outfile\"" << std::endl;
+			return;
+		}
 		outfile
 		<< "               ,@@@@@@@,\n"
 		<< "       ,,,.   ,@@@@@@/@@,  .oo8888o.\n"
@@ -42,6 +45,5 @@ void ShrubberyCreationForm::execute(const Bureaucrat& executor) const {
 		<< "    \\\\/ ._\\//_/__/  ,\\_//__\\\\/.  \\_//__/_ \n"
 		<< "\n"
 		<< "               (Art by jgs)\n";
-	}
-	
+		outfile.close();
 }
