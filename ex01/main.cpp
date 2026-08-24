@@ -22,16 +22,7 @@ int main()
 		c.signForm(ab);
 		b.signForm(ab);
 	}
-	catch(Bureaucrat::GradeTooLowException& e) {
-		std::cerr << e.what() << std::endl;
-	}
-	catch(Bureaucrat::GradeTooHighException& e) {
-		std::cerr << e.what() << std::endl;
-	}
-	catch(Form::GradeTooLowException& e) {
-		std::cerr << e.what() << std::endl;
-	}
-	catch(Form::GradeTooHighException& e) {
+	catch(std::exception& e) {
 		std::cerr << e.what() << std::endl;
 	}
 	return (0);

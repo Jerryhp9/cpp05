@@ -18,10 +18,7 @@ int main()
 		b.decrementGrade();
 		std::cout << b << std::endl;
 	}
-	catch(Bureaucrat::GradeTooLowException& e) {
-		std::cerr << e.what() << std::endl;
-	}
-	catch(Bureaucrat::GradeTooHighException& e) {
+	catch(std::exception& e) {
 		std::cerr << e.what() << std::endl;
 	}
 	return (0);
