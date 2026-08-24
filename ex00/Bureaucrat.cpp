@@ -12,9 +12,9 @@ Bureaucrat::Bureaucrat(int num, const std::string name) : _name(name),  _grade(n
 {
 	std::cout << "Bureaucrat constructor called" << std::endl;
 	 if (num < 1)
-		throw GradeTooLowException();
-	if (num > 150)
 		throw GradeTooHighException();
+	if (num > 150)
+		throw GradeTooLowException();
 }
 
 Bureaucrat::Bureaucrat() : _name("Unknown"), _grade(150) {

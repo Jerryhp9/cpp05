@@ -13,6 +13,10 @@ const char * AForm::FormNotSignException::what() const throw() {
 	return ("form is not signed");
 }
 
+const char * AForm::InvalidFormException::what() const throw() {
+	return ("Invalid Form name");
+}
+
 AForm::AForm() : _name("application form"), _isSigned(false), _gradeToSign(150), _gradeToExecute(150) {
 	std::cout << "Aform default constructor called" << std::endl;
 }

@@ -3,29 +3,32 @@
 
 int main()
 {
-	Intern SomerandomIntern;
-	AForm *rrf;
-	AForm *scf;
-	AForm *ppf;
-	AForm *invalid;
+	Intern SomeRandomIntern;
+	AForm *rrf = NULL;
+	AForm *scf = NULL;
+	AForm *ppf = NULL;
+	AForm *invalid = NULL;
 	try {
-		rrf = SomerandomIntern.makeForm("RobotomyRequestForm", "Bender");
+		rrf = SomeRandomIntern.makeForm("RobotomyRequestForm", "Bender");
 		std::cout << *rrf << std::endl;
 
-		scf = SomerandomIntern.makeForm("ShrubberyCreationForm", "Bender");
+		scf = SomeRandomIntern.makeForm("ShrubberyCreationForm", "Bender");
 		std::cout << *scf << std::endl;
-
-		ppf = SomerandomIntern.makeForm("PresidentialPardonForm", "Bender");
+		
+		ppf = SomeRandomIntern.makeForm("PresidentialPardonForm", "Bender");
 		std::cout << *ppf << std::endl;
-
-		invalid = SomerandomIntern.makeForm("RobotoCreationPardonForm", "Bender");
+		
+		invalid = SomeRandomIntern.makeForm("RobotoCreationPardonForm", "Bender");
 		std::cout << "invalid ptr is " << invalid << std::endl;
 	}
 	catch (std::exception& e) {
-		std::cout << e.what() << std::endl;
+		std::cout  << "Intern unable to create form due to " << e.what() << std::endl;
 	}
-	delete(rrf);
-	delete(scf);
-	delete(ppf);
+	if (rrf)
+		delete(rrf);
+	if (scf)
+		delete(scf);
+	if (ppf)
+		delete(ppf);
 	return (0);
 }

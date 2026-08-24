@@ -46,7 +46,7 @@ AForm* Intern::makeForm(std::string formName, std::string target) {
 			std::cout << "Intern creates " << form->getName() << std::endl;
 			return (form);
 		case (formType::UnknownForm):
-			std::cerr << "Unknown Form name" << std::endl;
+			throw AForm::InvalidFormException();
 	}
 	return (NULL);
 }
