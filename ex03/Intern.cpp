@@ -4,12 +4,12 @@ Intern::Intern() {
 	std::cout  << "Intern default constructor called" << std::endl;
 }
 
-Intern::Intern(const  Intern& other)  {
+Intern::Intern(const Intern& other) {
 	*this = other;
 	std::cout  << "Intern copy constructor called" << std::endl;
 }
 
-Intern& Intern::operator=(const Intern& other)  {
+Intern& Intern::operator=(const Intern& other) {
 	std::cout << "Intern copy assignment operator called" << std::endl;
 	(void) other;
 	return (*this);
@@ -47,6 +47,6 @@ AForm* Intern::makeForm(std::string formName, std::string target) {
 			return (form);
 		case (formType::UnknownForm):
 			std::cerr << "Unknown Form name" << std::endl;
-			return (NULL);
 	}
+	return (NULL);
 }

@@ -8,6 +8,10 @@ RobotomyRequestForm::RobotomyRequestForm(std::string s_target) : AForm("Robotomy
 	std::cout << "RobotomyRequestForm default constructor called" << std::endl;
 }
 
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& other) : AForm(other), _target(other._target) {
+	std::cout << "RobotomyRequestForm copy constructor called" << std::endl;
+}
+
 RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm& other) {
 	if (this != &other)
 	{
@@ -26,7 +30,7 @@ const std::string RobotomyRequestForm::getTarget() const {
 
 void RobotomyRequestForm::toExecute() const {
 	std::cout << "Make some drilling noise" << std::endl;
-	if (std::rand() % 2 == 1)
+	if (std::rand() % 2 == 0)
 		std::cout << this->getTarget() << " has been robotomized successfully" << std::endl;
 	else
 		std::cout << this->getTarget() << " has failed to robotomized" << std::endl;

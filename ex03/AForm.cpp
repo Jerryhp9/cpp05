@@ -25,6 +25,10 @@ AForm::AForm(std::string form, int gradeToSign, int gradeToExecute) : _name(form
 		throw GradeTooLowException();
 }
 
+AForm::AForm(const AForm& other) : _name(other._name), _isSigned(other._isSigned), _gradeToSign(other._gradeToSign) , _gradeToExecute(other._gradeToExecute) {
+	*this = other;
+}
+
 AForm& AForm::operator=(const AForm& other) {
 	if (this != &other)
 	{

@@ -16,7 +16,7 @@ struct  formType {
 	};
 };
 
-class Intern : virtual public AForm, public PresidentialPardonForm, public RobotomyRequestForm, public ShrubberyCreationForm {
+class Intern {
 	public:
 		Intern();
 		Intern(const Intern& other);

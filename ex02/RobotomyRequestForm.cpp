@@ -8,6 +8,10 @@ RobotomyRequestForm::RobotomyRequestForm(std::string s_target) : AForm("Robotomy
 	std::cout << "RobotomyRequestForm default constructor called" << std::endl;
 }
 
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& other) : AForm(other), _target(other._target) {
+	std::cout << "RobotomyRequestForm copy constructor called" << std::endl;
+}
+
 RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm& other) {
 	if (this != &other)
 	{

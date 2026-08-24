@@ -8,6 +8,10 @@ PresidentialPardonForm::PresidentialPardonForm(std::string s_target) : AForm("Pr
 	std::cout << "PresidentialPardonForm default constructor called" << std::endl;
 }
 
+PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& other) : AForm(other), _target(other._target) {
+	std::cout << "PresidentialPardonForm copy constructor called" << std::endl;
+}
+
 PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPardonForm& other) {
 	if (this != &other)
 	{
